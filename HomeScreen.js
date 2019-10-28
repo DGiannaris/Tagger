@@ -14,7 +14,7 @@ import {
 
 export default function HomeScreen(props) {
 
-
+//#181D25
 // onPress={() => props.navigation.navigate('List_Map')}
    return (
      <View style={styles.container}>
@@ -22,7 +22,7 @@ export default function HomeScreen(props) {
          style={styles.container}
          contentContainerStyle={styles.contentContainer}>
 
-        <Animatable.View animation="pulse" easing="ease-in-out-quart" iterationCount={3}>
+        <Animatable.View animation="pulse" easing="ease-in-out-quart" iterationCount='infinite'>
            <TouchableHighlight style={styles.touchableHigh}>
              <View>
                <Image style={styles.welcomeImage} source={require('./assets/hashtag.png')}/>
@@ -30,8 +30,8 @@ export default function HomeScreen(props) {
            </TouchableHighlight>
          </Animatable.View>
        </ScrollView>
-       <Animatable.Text style={styles.title1} animation='fadeInLeftBig'>Your #HashTags...</Animatable.Text>
-        <Animatable.Text style={styles.title2} animation='fadeInRightBig'>...in Instagram and Twitter</Animatable.Text>
+       <Animatable.Text style={styles.title1} animation='fadeInLeftBig'>Your #HashTags,</Animatable.Text>
+        <Animatable.Text style={styles.title2} animation='fadeInRightBig'>ONE App</Animatable.Text>
 
      </View>
    );
@@ -40,21 +40,21 @@ export default function HomeScreen(props) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#BA68C8',
+    backgroundColor: '#181D25',
     zIndex:0,
   },
   touchableHigh:{
       marginBottom:10,
       height: 150,
       width:150,
-      marginTop:'40%',
+      marginTop:'30%',
       marginLeft: 105,
       borderRadius:100,
-      backgroundColor:'#FFF59D',
+      backgroundColor:'#181D25',
       shadowColor: '#9C27B0',
       shadowOffset: {width: 0, height: 0},
       shadowRadius: 5,
-      elevation:2,
+      elevation:1,
       zIndex:1,
   },
   contentContainer: {
@@ -83,17 +83,16 @@ const styles = StyleSheet.create({
   },
   title1:{
     fontSize:20,
-    fontWeight:'400',
-    color:'#FFFDE7',
+    color:'#9C27B0',
     position:'absolute',
-    top:25,
-    left:15,
+    top:'80%',
+    left:'17%',
   },
   title2:{
     fontSize:20,
-    color:'#FFFDE7',
+    color:'#9C27B0',
     position:'absolute',
-    top:'85%',
-    left:'30%',
+    top:'80%',
+    left:'61%',
   }
 });
