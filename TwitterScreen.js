@@ -1,6 +1,7 @@
 import React,{Component} from 'react';
 import * as Animatable from 'react-native-animatable';
 
+
 import {
   StyleSheet,
   Text,
@@ -29,42 +30,4 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: '#181D25',
   },
-  contentContainer: {
-    paddingTop: 30,
-        zIndex:0,
-  },
-  welcomeImage: {
-    width: 100,
-    height: 80,
-    resizeMode: 'contain',
-    marginTop:35,
-    marginLeft: 26,
-
-  },
-  tabBarInfoText: {
-    fontSize: 20,
-    fontWeight:'400',
-    color: '#80DEEA',
-    textAlign: 'center',
-  },
-  tabBarArrow: {
-    fontSize: 40,
-    fontWeight:'400',
-    color: '#80DEEA',
-    textAlign: 'center',
-  },
-  title1:{
-    fontSize:20,
-    color:'#BA68C8',
-    position:'absolute',
-    top:'80%',
-    left:'17%',
-  },
-  title2:{
-    fontSize:20,
-    color:'#BA68C8',
-    position:'absolute',
-    top:'80%',
-    left:'61%',
-  }
 });

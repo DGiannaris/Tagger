@@ -5,7 +5,7 @@ import { createStackNavigator } from 'react-navigation-stack';
 import HomeScreen from './HomeScreen.js';
 import TwitterScreen from './TwitterScreen.js';
 import { LinearGradient } from 'expo-linear-gradient';
-
+import Search from './Search.js';
 
 export default function App() {
 console.disableYellowBox = true;
@@ -35,7 +35,7 @@ console.disableYellowBox = true;
       colors={['#BA68C8', '#1da1f2']}
       style={{ flex: 1,borderRadius:8 }}
       start={{x: 0, y: 0}}
-      end={{x:1, y: 0}}
+      end={{x:.6, y: 0}}
     />
   ),
         headerTitleStyle: {
@@ -44,6 +44,8 @@ console.disableYellowBox = true;
         },
         headerTintColor: '#F3E5F5',
         headerTransparent:true,
+        headerRight: (<Search/>),
+
       }),
     }
   });
