@@ -1,9 +1,10 @@
-import React from 'react';
+import React,{Component} from 'react';
 import * as Animatable from 'react-native-animatable';
 
 import {
   StyleSheet,
   Text,
+  TextInput,
   View,
   TouchableHighlight,
   Image,
@@ -18,7 +19,7 @@ export default function TwitterScreen(props) {
 // onPress={() => props.navigation.navigate('List_Map')}
    return (
      <View style={styles.container}>
-       <Text>Twitter</Text>
+     <TextInput style={{ backgroundColor: '#ededed', height: 60,marginTop:100 }} value={'Hello'}/>
      </View>
    );
 }
@@ -27,21 +28,6 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#181D25',
-    zIndex:0,
-  },
-  touchableHigh:{
-      marginBottom:10,
-      height: 150,
-      width:150,
-      marginTop:'30%',
-      marginLeft: 105,
-      borderRadius:100,
-      backgroundColor:'#181D25',
-      shadowColor: '#9C27B0',
-      shadowOffset: {width: 0, height: 0},
-      shadowRadius: 5,
-      elevation:0,
-      zIndex:1,
   },
   contentContainer: {
     paddingTop: 30,
