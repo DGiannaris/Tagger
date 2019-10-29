@@ -1,4 +1,4 @@
-import React from 'react';
+import React,{useState} from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import { createAppContainer } from 'react-navigation';
 import { createStackNavigator } from 'react-navigation-stack';
@@ -53,14 +53,14 @@ console.disableYellowBox = true;
 
   const AppContainer = createAppContainer(RootStack);
 
-
+ const [search,setSearch]=useState(false);
 
 
 
 
 
   return (
-  <AppContainer />
+  <AppContainer screenProps={search}/>
   );
 }
 
