@@ -12,27 +12,13 @@ import {
 
 
 
-export default function HomeScreen(props) {
+export default function TwitterScreen(props) {
 
 //#181D25
 // onPress={() => props.navigation.navigate('List_Map')}
    return (
      <View style={styles.container}>
-       <ScrollView
-         style={styles.container}
-         contentContainerStyle={styles.contentContainer}>
-
-        <Animatable.View animation="pulse" easing="ease-in-out-quart" iterationCount='infinite'>
-           <TouchableHighlight style={styles.touchableHigh} onPress={() => props.navigation.navigate('Twitter')}>
-             <View>
-               <Image style={styles.welcomeImage} source={require('./assets/hashtag.png')}/>
-             </View>
-           </TouchableHighlight>
-         </Animatable.View>
-       </ScrollView>
-       <Animatable.Text style={styles.title1} animation='fadeInLeftBig'>Your #HashTags,</Animatable.Text>
-        <Animatable.Text style={styles.title2} animation='fadeInRightBig'>ONE App</Animatable.Text>
-
+       <Text>Twitter</Text>
      </View>
    );
 }

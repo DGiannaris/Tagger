@@ -2,7 +2,10 @@ import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import { createAppContainer } from 'react-navigation';
 import { createStackNavigator } from 'react-navigation-stack';
-import HomeScreen from './HomeScreen.js'
+import HomeScreen from './HomeScreen.js';
+import TwitterScreen from './TwitterScreen.js';
+import { LinearGradient } from 'expo-linear-gradient';
+
 
 export default function App() {
 console.disableYellowBox = true;
@@ -11,16 +14,35 @@ console.disableYellowBox = true;
     Home: {
       screen: HomeScreen,
       navigationOptions: () => ({
-        title: 'Tagger',
+        title: '#Tagger',
         headerStyle: {
-          backgroundColor: '#9C27B0'
+          backgroundColor: '#BA68C8'
         },
         headerTitleStyle: {
-          color: '#FFFDE7',
+          color: '#F3E5F5',
           fontSize: 30
         },
       }),
     },
+    Twitter:{
+      screen:TwitterScreen,
+      navigationOptions: () => ({
+        title: 'Twitter',
+        headerBackground: (
+    <LinearGradient
+      colors={['#BA68C8', '#1da1f2']}
+      style={{ flex: 1 }}
+      start={{x: 0, y: 0}}
+      end={{x:.8, y: 0}}
+    />
+  ),
+        headerTitleStyle: {
+          color: '#F3E5F5',
+          fontSize: 30
+        },
+        headerTintColor: '#F3E5F5',
+      }),
+    }
   });
 
 
