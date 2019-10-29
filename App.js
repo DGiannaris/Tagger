@@ -16,12 +16,14 @@ console.disableYellowBox = true;
       navigationOptions: () => ({
         title: '#Tagger',
         headerStyle: {
-          backgroundColor: '#BA68C8'
+          backgroundColor: '#BA68C8',
+          borderRadius:8
         },
         headerTitleStyle: {
           color: '#F3E5F5',
           fontSize: 30
         },
+        headerTransparent:true,
       }),
     },
     Twitter:{
@@ -31,9 +33,9 @@ console.disableYellowBox = true;
         headerBackground: (
     <LinearGradient
       colors={['#BA68C8', '#1da1f2']}
-      style={{ flex: 1 }}
+      style={{ flex: 1,borderRadius:8 }}
       start={{x: 0, y: 0}}
-      end={{x:.8, y: 0}}
+      end={{x:1, y: 0}}
     />
   ),
         headerTitleStyle: {
@@ -41,6 +43,7 @@ console.disableYellowBox = true;
           fontSize: 30
         },
         headerTintColor: '#F3E5F5',
+        headerTransparent:true,
       }),
     }
   });
