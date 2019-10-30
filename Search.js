@@ -5,6 +5,7 @@ import * as Animatable from 'react-native-animatable';
 import {
   StyleSheet,
   Text,
+  Button,
   TextInput,
   View,
   TouchableHighlight,
@@ -17,13 +18,13 @@ import {
 export default function Search(props) {
 
    return (
-     <View >
+
      <TouchableHighlight style={styles.searchIcon}>
        <View>
          <Image  source={require('./assets/search.png')}/>
        </View>
      </TouchableHighlight>
-     </View>
+
    );
 }
 

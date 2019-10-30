@@ -52,7 +52,9 @@ console.disableYellowBox = true;
         headerTransparent:true,
       }),
     },
-    Twitter:TwitterStack
+    Twitter:{
+      screen:TwitterScreen,
+    }
   });
 
 
