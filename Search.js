@@ -1,4 +1,5 @@
 import React,{Component} from 'react';
+import {useEffect} from 'react';
 import * as Animatable from 'react-native-animatable';
 
 import {
@@ -15,10 +16,9 @@ import {
 
 export default function Search(props) {
 
-  console.log(props)
    return (
      <View >
-     <TouchableHighlight style={styles.searchIcon} onPress={() => props.setSearch(!props.search)}>
+     <TouchableHighlight style={styles.searchIcon}>
        <View>
          <Image  source={require('./assets/search.png')}/>
        </View>
