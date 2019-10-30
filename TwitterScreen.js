@@ -16,11 +16,10 @@ import {
 
 export default function TwitterScreen(props) {
 
-//#181D25
-// onPress={() => props.navigation.navigate('List_Map')}
+console.log(props)
    return (
      <View style={styles.container}>
-     <TextInput style={{ backgroundColor: '#ededed', height: 60,marginTop:100 }} value={'Hello'}/>
+     {props.screenProps?<TextInput style={{ backgroundColor: '#ededed', height: 60,marginTop:100 }} value={'Hello'}/>:null}
      </View>
    );
 }

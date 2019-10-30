@@ -15,10 +15,10 @@ import {
 
 export default function Search(props) {
 
-  console.log(props.screenProps)
+  console.log(props)
    return (
      <View >
-     <TouchableHighlight style={styles.searchIcon} onPress={() => props.screenProps.setSearch(!props.screenProps.search)}>
+     <TouchableHighlight style={styles.searchIcon} onPress={() => props.setSearch(!props.search)}>
        <View>
          <Image  source={require('./assets/search.png')}/>
        </View>

@@ -10,6 +10,32 @@ import Search from './Search.js';
 export default function App() {
 console.disableYellowBox = true;
 
+
+const TwitterStack = createStackNavigator({
+  Twitter:{
+    screen:TwitterScreen,
+    navigationOptions: () => ({
+      title: 'Twitter',
+      headerBackground: (
+  <LinearGradient
+    colors={['#BA68C8', '#1da1f2']}
+    style={{ flex: 1,borderRadius:8 }}
+    start={{x: 0, y: 0}}
+    end={{x:.6, y: 0}}
+  />
+),
+      headerTitleStyle: {
+        color: '#F3E5F5',
+        fontSize: 30
+      },
+      headerTintColor: '#F3E5F5',
+      headerTransparent:true,
+      headerRight: (<Search search={search} setSearch={handlesearch}/>),
+
+    }),
+  }
+})
+
   const RootStack = createStackNavigator({
     Home: {
       screen: HomeScreen,
@@ -26,28 +52,7 @@ console.disableYellowBox = true;
         headerTransparent:true,
       }),
     },
-    Twitter:{
-      screen:TwitterScreen,
-      navigationOptions: () => ({
-        title: 'Twitter',
-        headerBackground: (
-    <LinearGradient
-      colors={['#BA68C8', '#1da1f2']}
-      style={{ flex: 1,borderRadius:8 }}
-      start={{x: 0, y: 0}}
-      end={{x:.6, y: 0}}
-    />
-  ),
-        headerTitleStyle: {
-          color: '#F3E5F5',
-          fontSize: 30
-        },
-        headerTintColor: '#F3E5F5',
-        headerTransparent:true,
-        headerRight: (<Search/>),
-
-      }),
-    }
+    Twitter:TwitterStack
   });
 
 
@@ -55,7 +60,9 @@ console.disableYellowBox = true;
 
  const [search,setSearch]=useState(false);
 
-
+ const handlesearch=(val)=>{
+   setSearch(val);
+ }
 
 
 

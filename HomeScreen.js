@@ -14,8 +14,7 @@ import {
 
 export default function HomeScreen(props) {
 
-//#181D25
-// onPress={() => props.navigation.navigate('List_Map')}
+
    return (
      <View style={styles.container}>
        <ScrollView
