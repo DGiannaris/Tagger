@@ -4,7 +4,7 @@ import * as Animatable from 'react-native-animatable';
 import { createAppContainer } from 'react-navigation';
 import { createStackNavigator } from 'react-navigation-stack';
 import { LinearGradient } from 'expo-linear-gradient';
-import Search from './Search.js';
+import Input from './Input.js';
 import {
   StyleSheet,
   Text,
@@ -32,7 +32,12 @@ end={{x:.6, y: 0}}
   },
   headerTintColor: '#F3E5F5',
   headerTransparent:true,
-  headerRight: (<Button onPress={()=>navigation.getParam('search')()} title={'tt'}/>),
+  headerRight: (
+    <TouchableHighlight underlayColor='#39b1fa' style={styles.searchIcon} onPress={()=>navigation.getParam('search')()}>
+      <View>
+        <Image style={styles.icon} source={require('./assets/search.png')}/>
+      </View>
+    </TouchableHighlight>),
 }}
 
 
@@ -53,7 +58,7 @@ export default function TwitterScreen(props) {
 
    return (
      <View style={styles.container}>
-     {search?<TextInput style={{ backgroundColor: '#ededed', height: 60,marginTop:100 }} value={'Hello'}/>:null}
+     {search?<Input value={'Hello'}/>:null}
      </View>
    );
 }
@@ -63,4 +68,18 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: '#181D25',
   },
+  searchIcon:{
+    marginRight: 7,
+    marginTop:3,
+    width:40,
+    height:40,
+    borderRadius:100,
+
+  },
+  icon:{
+    marginLeft:6,
+    marginTop:5.5,
+
+  },
+
 });

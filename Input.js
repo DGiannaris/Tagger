@@ -18,13 +18,9 @@ import {
 export default function Search(props) {
 
    return (
-
-     <TouchableHighlight style={styles.searchIcon}>
        <View>
-         <Image  source={require('./assets/search.png')}/>
+        <TextInput style={styles.inputField} value={'Hello'}/>
        </View>
-     </TouchableHighlight>
-
    );
 }
 
@@ -37,9 +33,21 @@ const styles = StyleSheet.create({
     paddingTop: 30,
         zIndex:0,
   },
-  searchIcon:{
-    marginRight: 10,
-    marginTop:1,
-  }
+  inputField:{
+    backgroundColor:'#181D25',
+    height: 60,
+    marginTop:100,
+    marginLeft:15,
+    marginRight:15,
+    borderRadius:8,
+    shadowColor: '#9C27B0',
+    shadowOffset: {width: 0, height: 0},
+    shadowRadius: 1,
+    elevation:1,
+    borderWidth: 2,
+    borderColor: '#F3E5F5',
+    borderStyle:'dashed',
+    color:'#F3E5F5'
+  },
 
 });
