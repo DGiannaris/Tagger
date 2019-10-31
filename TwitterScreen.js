@@ -45,20 +45,30 @@ end={{x:.6, y: 0}}
 export default function TwitterScreen(props) {
 
   const [search,setSearch]=useState(false);
-
+  const [val,setVal]=useState('');
 
   const handlesearch=()=>{
     setSearch(!search);
   }
+
+const handleVal=(val)=>{
+  setVal(val);
+}
 
   useEffect(() => {
    props.navigation.setParams({search:handlesearch})
  }, [search])
 
 
+useEffect(()=>{
+ //here dispatch to fetch from twitter api
+},[val])
+
+
+
    return (
      <View style={styles.container}>
-     {search?<Input value={'Hello'}/>:null}
+     {search?<Input val={val} handleval={handleVal}/>:null}
      </View>
    );
 }

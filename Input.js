@@ -15,11 +15,11 @@ import {
 
 
 
-export default function Search(props) {
-
+export default function Input(props) {
    return (
        <View>
-        <TextInput style={styles.inputField} value={'Hello'}/>
+        <TextInput  autoFocus={true} selectionColor={'#F3E5F5'}
+        style={styles.inputField} onChangeText={text=>props.handleval(text)} value={props.val} />
        </View>
    );
 }
@@ -39,6 +39,7 @@ const styles = StyleSheet.create({
     marginTop:100,
     marginLeft:15,
     marginRight:15,
+    paddingLeft: 20,
     borderRadius:8,
     shadowColor: '#9C27B0',
     shadowOffset: {width: 0, height: 0},
