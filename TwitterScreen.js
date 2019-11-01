@@ -5,6 +5,8 @@ import { createAppContainer } from 'react-navigation';
 import { createStackNavigator } from 'react-navigation-stack';
 import { LinearGradient } from 'expo-linear-gradient';
 import Input from './Input.js';
+import twitter from 'react-native-simple-twitter';
+import {keys} from './data/twitter-config.js'
 import {
   StyleSheet,
   Text,
@@ -17,6 +19,10 @@ import {
 } from 'react-native';
 
 
+
+twitter.setConsumerKey(keys['consumerKey'],keys['consumerSecret'])
+twitter.setAccessToken(keys['accessToken'],keys['accessTokenSecret'])
+//twitter.api(method,endpoint,parameters)
 
 TwitterScreen.navigationOptions =({navigation})=> {
   return {title: 'Twitter',
@@ -55,13 +61,24 @@ const handleVal=(val)=>{
   setVal(val);
 }
 
+  const fetch =async(val)=>{
+    if(val!=='')
+    {
+      const posts= await twitter.get('search/tweets.json',{result_type:'mixed',count:2,q:`#${val}`})
+      console.log(posts)
+    }
+
+}
+
   useEffect(() => {
    props.navigation.setParams({search:handlesearch})
  }, [search])
 
 
-useEffect(()=>{
- //here dispatch to fetch from twitter api
+ useEffect(()=>{
+
+   fetch(val);
+
 },[val])
 
 
