@@ -52,24 +52,30 @@ export default function TwitterScreen(props) {
   let twitts=[];
   const [search,setSearch]=useState(false);
   const [val,setVal]=useState('');
-
+  const [twittArray,setTwittArray]=useState([{
+    loading:true,
+    data:{},
+  }])
   const handlesearch=()=>{
     setSearch(!search);
   }
 
-const handleVal=(val)=>{
-  setVal(val);
+  const handleVal=(val)=>{
+    setVal(val);
+  }
+
+  const handletwittArray=(val)=>{
+    setTwittArray(oldArray => [...oldArray, val]);
+
 }
 
   const fetch =async(val)=>{
     if(val!=='')
     {
       const posts= await twitter.get('search/tweets.json',{result_type:'mixed',count:1,q:`#${val}`})
-      await twitts.push({'name':posts.statuses[0].user['screen_name'],
-      'text':posts.statuses[0].text});
-      //console.log(twitts)
-      //console.log(posts.statuses[0].text)
-        //console.log(posts.statuses[0])
+      await handletwittArray({loading:false,data:{'name':posts.statuses[0].user['screen_name'],
+      'text':posts.statuses[0].text}});
+
     }
 
 }
@@ -79,27 +85,37 @@ const handleVal=(val)=>{
  }, [search])
 
 
+ useEffect(() => {
+    //console.log(twittArray)
+}, [twittArray])
+
  useEffect(()=>{
 
    fetch(val);
 
 },[val])
 
-console.log(twitts)
-const listitems = twitts.map((item,ind)=>{
+
+
+
+const listitems = twittArray.map((item,ind)=>{
+  console.log(item)
   return (
-    <View key={400+ind}>
-      <Text>{item['name'],item['text']}</Text>
+    <View key={ind}>
+      {item['loading']?null:
+      <Text style={styles.item}>{item['data'].name}</Text>}
     </View>
-  )
-});
+  );
+
+})
+
 
    return (
 
-     <View style={styles.container}>
+     <ScrollView style={styles.container}>
      {search?<Input val={val} handleval={handleVal}/>:null}
-     {listitems}
-     </View>
+     <View style={styles.list}>{listitems}</View>
+     </ScrollView>
 
 
 
@@ -124,5 +140,21 @@ const styles = StyleSheet.create({
     marginTop:5.5,
 
   },
-
+  item: {
+    marginLeft:10,
+    marginTop:20,
+    padding: 2,
+    fontSize: 16,
+    height: 44,
+    fontWeight:'400',
+    color:'#1DA1F2',
+  },
+  list:{
+    marginTop:100,
+    padding:5,
+    borderRadius:8,
+    backgroundColor: '#F3E5F5',
+    marginLeft:10,
+    marginRight:10,
+  }
 });
