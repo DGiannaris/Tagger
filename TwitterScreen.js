@@ -67,6 +67,7 @@ const handleVal=(val)=>{
       const posts= await twitter.get('search/tweets.json',{result_type:'mixed',count:1,q:`#${val}`})
       await twitts.push({'name':posts.statuses[0].user['screen_name'],
       'text':posts.statuses[0].text});
+      //console.log(twitts)
       //console.log(posts.statuses[0].text)
         //console.log(posts.statuses[0])
     }
