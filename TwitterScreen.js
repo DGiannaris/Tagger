@@ -49,7 +49,7 @@ end={{x:.6, y: 0}}
 
 
 export default function TwitterScreen(props) {
-
+  let twitts=[];
   const [search,setSearch]=useState(false);
   const [val,setVal]=useState('');
 
@@ -64,8 +64,11 @@ const handleVal=(val)=>{
   const fetch =async(val)=>{
     if(val!=='')
     {
-      const posts= await twitter.get('search/tweets.json',{result_type:'mixed',count:2,q:`#${val}`})
-      console.log(posts)
+      const posts= await twitter.get('search/tweets.json',{result_type:'mixed',count:1,q:`#${val}`})
+      await twitts.push({'name':posts.statuses[0].user['screen_name'],
+      'text':posts.statuses[0].text});
+      //console.log(posts.statuses[0].text)
+        //console.log(posts.statuses[0])
     }
 
 }
@@ -81,12 +84,24 @@ const handleVal=(val)=>{
 
 },[val])
 
-
+console.log(twitts)
+const listitems = twitts.map((item,ind)=>{
+  return (
+    <View key={400+ind}>
+      <Text>{item['name'],item['text']}</Text>
+    </View>
+  )
+});
 
    return (
+
      <View style={styles.container}>
      {search?<Input val={val} handleval={handleVal}/>:null}
+     {listitems}
      </View>
+
+
+
    );
 }
 
