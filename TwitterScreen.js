@@ -69,12 +69,25 @@ export default function TwitterScreen(props) {
 
 }
 
+const handledefArray=()=>{
+  setTwittArray(oldArray=>[]);
+}
+
   const fetch =async(val)=>{
     if(val!=='')
     {
-      const posts= await twitter.get('search/tweets.json',{result_type:'mixed',count:1,q:`#${val}`})
-      await handletwittArray({loading:false,data:{'name':posts.statuses[0].user['screen_name'],
-      'text':posts.statuses[0].text}});
+      const posts= await twitter.get('search/tweets.json',{result_type:'mixed',q:`#${val}`})
+
+    const postData=   await posts.statuses.map((post,ind)=>{
+
+        handletwittArray({loading:false,data:{'alias':post.user['name'],'name':post.user['screen_name'],'pic':post.user['profile_image_url_https'],
+        'text':post.text}})
+      //return post.user['screen_name']
+      })
+
+    //  await handletwittArray({loading:false,data:{'name':posts.statuses[0].user['screen_name'],
+    //  'text':posts.statuses[0].text}});
+
 
     }
 
@@ -90,7 +103,7 @@ export default function TwitterScreen(props) {
 }, [twittArray])
 
  useEffect(()=>{
-
+   handledefArray();
    fetch(val);
 
 },[val])
@@ -99,11 +112,24 @@ export default function TwitterScreen(props) {
 
 
 const listitems = twittArray.map((item,ind)=>{
-  console.log(item)
   return (
-    <View key={ind}>
+    <View key={100+ind} style={{ flex: 1}}>
       {item['loading']?null:
-      <Text style={styles.item}>{item['data'].name}</Text>}
+      <View key={200+ind} style={styles.list}>
+        <View  key={ind}>
+          <View key={600+ind} style={styles.twitcont} >
+             <Image key={500+ind}
+                  style={styles.profpic}
+                  source={{uri:item['data'].pic}}
+              />
+              <View key={700+ind} style={styles.names}>
+                  <Text key={800+ind} style={styles.alias}>{item['data'].alias}</Text>
+                  <Text key={300+ind} style={styles.item}>{`@${item['data'].name}`}</Text>
+              </View>
+            </View>
+          <Text key={400+ind} style={styles.listtext}>{item['data'].text}</Text>
+        </View>
+      </View>}
     </View>
   );
 
@@ -114,7 +140,7 @@ const listitems = twittArray.map((item,ind)=>{
 
      <ScrollView style={styles.container}>
      {search?<Input val={val} handleval={handleVal}/>:null}
-     <View style={styles.list}>{listitems}</View>
+     <View style={{marginTop:100}}>{listitems}</View>
      </ScrollView>
 
 
@@ -125,7 +151,7 @@ const listitems = twittArray.map((item,ind)=>{
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#181D25',
+    backgroundColor: '#181D25'
   },
   searchIcon:{
     marginRight: 7,
@@ -140,21 +166,56 @@ const styles = StyleSheet.create({
     marginTop:5.5,
 
   },
-  item: {
-    marginLeft:10,
-    marginTop:20,
-    padding: 2,
-    fontSize: 16,
-    height: 44,
-    fontWeight:'400',
-    color:'#1DA1F2',
+  twitcont:{
+    flex:1,
+    flexDirection:'row',
+
+  },
+  names:{
+    flex:1,
+    flexDirection:'column',
   },
   list:{
-    marginTop:100,
+    marginTop:17,
     padding:5,
     borderRadius:8,
     backgroundColor: '#F3E5F5',
     marginLeft:10,
     marginRight:10,
+  },
+  profpic:{
+    width: 60,
+    height: 60,
+    borderRadius:100,
+    resizeMode : 'cover',
+  },
+  item: {
+    marginTop:-4,
+    marginLeft:10,
+    padding: 2,
+    fontSize: 16,
+    height: 35,
+    fontWeight:'400',
+    color:'#1DA1F2',
+  },
+  alias:{
+    marginLeft:10,
+    padding: 3,
+    fontSize: 17,
+    height: 35,
+    fontWeight:'400',
+    color:'#181D25',
+
+  },
+  listtext:{
+    marginLeft:10,
+    marginTop:2,
+    paddingLeft: 2,
+    paddingRight:2,
+    paddingBottom:15,
+    fontSize: 16,
+    flex:2,
+    fontWeight:'400',
+    color:'#181D25',
   }
 });
