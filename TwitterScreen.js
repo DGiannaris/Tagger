@@ -55,12 +55,12 @@ export default function TwitterScreen(props) {
   const [twittArray,setTwittArray]=useState([{
     data:{},
   }])
-  const [load,setLoad]=useState(true);
+  const [load,setLoad]=useState(false);
 
 
 
-  const handleLoad=()=>{
-    setLoad(false);
+  const handleLoad=(val)=>{
+    setLoad(val);
   }
 
   const handlesearch=()=>{
@@ -84,16 +84,22 @@ const handledefArray=()=>{
 
     const fetchtrends =async()=>{
 
+      handleLoad(true);
+
       const posts= await twitter.get('trends/place.json',{id:1})
 
       const postData= await posts[0].trends.map((post,ind)=>{
 
          handletwittArray({data:{'alias':post['name'],'name':'','pic':'',
          'text':''}})
-          handleLoad()
+
+
+
       })
 
-  }
+      handleLoad(false);
+
+    }
 
 
 
@@ -101,49 +107,48 @@ const handledefArray=()=>{
   const fetchtags =async(val)=>{
     if(val!=='')
     {
+      handleLoad(true);
+
       const posts= await twitter.get('search/tweets.json',{result_type:'mixed',q:`#${val}`})
 
-    const postData=  await posts.statuses.map((post,ind)=>{
+      const postData=  await posts.statuses.map((post,ind)=>{
 
         handletwittArray({data:{'alias':post.user['name'],'name':post.user['screen_name'],'pic':post.user['profile_image_url_https'],
         'text':post.text}})
-        handleLoad()
+
       })
 
-    //  await handletwittArray({loading:false,data:{'name':posts.statuses[0].user['screen_name'],
-    //  'text':posts.statuses[0].text}});
-
-
+      handleLoad(false);
     }
+  }
 
-}
+useEffect(() => {
+  handleLoad(true);
+}, []);
 
-  useEffect(() => {
-   props.navigation.setParams({search:handlesearch})
- }, [search])
+useEffect(() => {
+  props.navigation.setParams({ search: handlesearch });
+}, [search]);
 
+useEffect(() => {
+  handledefArray();
 
- useEffect(() => {
-    //console.log(twittArray)
-}, [twittArray])
+  val === "" ? fetchtrends() : null;
 
- useEffect(()=>{
-   handledefArray();
-   fetchtags();
+  if (val !== "") {
+    const timeout = setTimeout(() => {
+      fetchtags(val);
+    }, 270);
+    return () => clearTimeout(timeout);
+  }
+}, [val]);
 
-},[val])
-
-useEffect(()=>{
-
-  fetchtrends();
-
-},[])
 
 const trends = twittArray.map((item,ind)=>{
   return (
     <View key={100+ind} style={{ flex: 1}}>
-        <View>
-          <Text style={styles.item}>{item['data'].alias}</Text>
+        <View >
+          <Text style={styles.tag}>{item['data'].alias}</Text>
         </View>
     </View>
   );
@@ -164,7 +169,6 @@ const loading=()=>{
 const listitems = twittArray.map((item,ind)=>{
   return (
     <View key={100+ind} style={{ flex: 1}}>
-      {load?null:
       <View key={200+ind} style={styles.list}>
         <View  key={ind}>
           <View key={600+ind} style={styles.twitcont} >
@@ -179,7 +183,7 @@ const listitems = twittArray.map((item,ind)=>{
             </View>
           <Text key={400+ind} style={styles.listtext}>{item['data'].text}</Text>
         </View>
-      </View>}
+      </View>
     </View>
   );
 
@@ -189,9 +193,10 @@ const listitems = twittArray.map((item,ind)=>{
    return (
 
      <ScrollView style={styles.container}>
-     {search?<Input val={val} handleval={handleVal}/>:null}
-     <View style={{marginTop:100}}>{val!==''?listitems:null}</View>
-     <View style={styles.trends}>{val===''?load?loading():trends:null}</View>
+       {search?<Input val={val} handleval={handleVal}/>:null}
+       <View style={{marginTop:100}}>{val!==''?load?loading():listitems:null}</View>
+       {val===''?load?null:<Text style={styles.tagstitle}>Top Trend #Tags Worldwide</Text>:null}
+       <View style={styles.trends}>{val===''?load?loading():trends:null}</View>
      </ScrollView>
 
 
@@ -204,13 +209,27 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: '#181D25'
   },
+  tagstitle:{
+    height:35,
+    textAlign:'center',
+    fontWeight:'600',
+    fontSize:17,
+    color:'#BA68C8',
+  },
+  tag:{
+    padding: 2,
+    fontSize: 16,
+    height: 35,
+    fontWeight:'400',
+    color:'#1DA1F2',
+    textAlign:'center',
+  },
   trends:{
     padding:5,
     borderRadius:8,
     backgroundColor: '#F3E5F5',
     marginLeft:10,
     marginRight:10,
-    marginTop:20,
   },
   searchIcon:{
     marginRight: 7,
