@@ -55,7 +55,7 @@ export default function TwitterScreen(props) {
   const [twittArray,setTwittArray]=useState([{
     data:{},
   }])
-  const [load,setLoad]=useState(false);
+  const [load,setLoad]=useState(true);
 
 
 
@@ -90,7 +90,7 @@ const handledefArray=()=>{
 
       const postData= await posts[0].trends.map((post,ind)=>{
 
-         handletwittArray({data:{'alias':post['name'],'name':'','pic':'',
+         handletwittArray({data:{'alias':post['name'],'name':'','pic':'./assets/hashtag.png',
          'text':''}})
 
 
@@ -144,22 +144,28 @@ useEffect(() => {
 }, [val]);
 
 
-const trends = twittArray.map((item,ind)=>{
-  return (
-    <View key={100+ind} style={{ flex: 1}}>
-        <View >
-          <Text style={styles.tag}>{item['data'].alias}</Text>
+const trends = twittArray.map((item, ind) => {
+    return (
+        <View key={100 + ind}>
+          <Text style={styles.tag}>{item["data"].alias}</Text>
         </View>
-    </View>
-  );
+    );
+  });
 
-})
+const trendContainer=()=>{
+  return(
+      <View style={styles.trends}>
+        {trends}
+      </View>
+  );
+}
+
 
 
 const loading=()=>{
   return(
-  <View style={{height: 35,marginLeft:'38%',}}>
-    <Text style={{fontSize: 19,fontWeight:'400',}}>
+  <View style={{marginTop:100,height: 35,marginLeft:'38%',}}>
+    <Text style={{fontSize: 19,fontWeight:'400',color:'white'}}>
       Loading...
     </Text>
   </View>
@@ -194,9 +200,10 @@ const listitems = twittArray.map((item,ind)=>{
 
      <ScrollView style={styles.container}>
        {search?<Input val={val} handleval={handleVal}/>:null}
-       <View style={{marginTop:100}}>{val!==''?load?loading():listitems:null}</View>
+       {load?loading():null}
+       <View style={{marginTop:100}}>{val!==''?listitems:null}</View>
        {val===''?load?null:<Text style={styles.tagstitle}>Top Trend #Tags Worldwide</Text>:null}
-       <View style={styles.trends}>{val===''?load?loading():trends:null}</View>
+       <View >{val==''?!load?trendContainer():null:null}</View>
      </ScrollView>
 
 
@@ -225,6 +232,7 @@ const styles = StyleSheet.create({
     textAlign:'center',
   },
   trends:{
+    flex:1,
     padding:5,
     borderRadius:8,
     backgroundColor: '#F3E5F5',
