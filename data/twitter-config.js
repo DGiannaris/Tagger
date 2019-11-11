@@ -1,6 +1,6 @@
 export const keys={
-  'consumerKey':'xxx',
-    'consumerSecret':'xxx',
+    'consumerKey':'xxx`',
+    'consumerSecret':'xx',
     'accessToken':'xxx',
     'accessTokenSecret':'xxx',
 }
